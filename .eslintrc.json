@@ -33,7 +33,7 @@
         "extensions": [".tsx"]
       }
     ],
-    // "import/prefer-default-export": "off",
+    "import/prefer-default-export": "off",
     // "@typescript-eslint/explicit-function-return-type": "off",
     // "@typescript-eslint/explicit-member-accessibility": "on",
     "prettier/prettier": "error"

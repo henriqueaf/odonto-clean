@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Dashboard: React.FC = () => {
-  const [users, setUsers] = useState([{ id: 'Teste 1', name: 'Testando' }]);
+import { ClientsList } from '../../store/clients/types';
+
+type StateProps = ClientsList;
+
+interface DispatchProps {
+  loadRequest(): void;
+}
+
+export type Props = StateProps & DispatchProps;
+
+const Dashboard: React.FC<Props> = ({ clients, loadRequest }) => {
+  useEffect(() => {
+    loadRequest();
+  }, [loadRequest]);
 
   return (
     <ul className="list-group">
-      {users.map(user => (
+      {clients.map(client => (
         <Link
           to="/"
           className="list-group-item list-group-item-action"
-          key={user.id}
+          key={client.id}
         >
-          {user.name}
+          {client.name}
         </Link>
       ))}
     </ul>
