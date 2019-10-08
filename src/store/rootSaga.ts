@@ -1,8 +1,8 @@
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, call } from 'redux-saga/effects';
 
-import { ClientsTypes } from './clients/types';
-import { load } from './clients/sagas';
+import { SagaIterator } from 'redux-saga';
+import { syncClients } from './clients/sagas';
 
-export default function* rootSaga() {
-  return yield all([takeLatest(ClientsTypes.LOAD_REQUEST, load)]);
+export default function* rootSaga(): SagaIterator {
+  yield all([call(syncClients)]);
 }

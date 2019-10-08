@@ -9,16 +9,16 @@ const INITIAL_STATE: ClientsState = {
 
 const reducer: Reducer<ClientsState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ClientsTypes.LOAD_REQUEST:
+    case ClientsTypes.FETCH_CLIENTS_REQUEST:
       return { ...state, loading: true };
-    case ClientsTypes.LOAD_SUCCESS:
+    case ClientsTypes.FETCH_CLIENTS_SUCCESS:
       return {
         ...state,
         loading: false,
         error: false,
         data: action.payload.data,
       };
-    case ClientsTypes.LOAD_FAILURE:
+    case ClientsTypes.FETCH_CLIENTS_FAILURE:
       return { ...state, loading: false, error: true, data: [] };
     default:
       return state;

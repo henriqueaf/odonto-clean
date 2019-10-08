@@ -6,15 +6,15 @@ import { ClientsList } from '../../store/clients/types';
 type StateProps = ClientsList;
 
 interface DispatchProps {
-  loadRequest(): void;
+  fetchClientsRequest(): void;
 }
 
 export type Props = StateProps & DispatchProps;
 
-const Dashboard: React.FC<Props> = ({ clients, loadRequest }) => {
+const Dashboard: React.FC<Props> = ({ clients, fetchClientsRequest }) => {
   useEffect(() => {
-    loadRequest();
-  }, [loadRequest]);
+    fetchClientsRequest();
+  }, [fetchClientsRequest]);
 
   return (
     <ul className="list-group">

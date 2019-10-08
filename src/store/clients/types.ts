@@ -2,16 +2,16 @@
  * Action types
  */
 export enum ClientsTypes {
-  LOAD_REQUEST = '@clients/LOAD_REQUEST',
-  LOAD_SUCCESS = '@clients/LOAD_SUCCESS',
-  LOAD_FAILURE = '@clients/LOAD_FAILURE',
+  FETCH_CLIENTS_REQUEST = '@clients/FETCH_CLIENTS_REQUEST',
+  FETCH_CLIENTS_SUCCESS = '@clients/FETCH_CLIENTS_SUCCESS',
+  FETCH_CLIENTS_FAILURE = '@clients/FETCH_CLIENTS_FAILURE',
 }
 
 /**
  * Data types
  */
 export interface Client {
-  id: number;
+  id: string;
   name: string;
 }
 

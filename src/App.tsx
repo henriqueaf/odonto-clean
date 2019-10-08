@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import Routes from './routes';
 import { createReduxStore } from './store';
 
+require('dotenv').config();
+
 const store = createReduxStore();
 
 const App: React.FC = () => (
