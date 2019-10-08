@@ -1,19 +1,31 @@
-import { createStore } from 'redux';
+import { createStore, Store, applyMiddleware, StoreEnhancer } from 'redux';
+import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from './rootReducer';
+import rootSaga from './rootSaga';
 import { ClientsState } from './clients/types';
 
 export interface ApplicationState {
   clients: ClientsState;
 }
 
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const store = createStore(
-  rootReducer,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-);
-/* eslint-enable */
+export const createReduxStore = ({
+  middlewares = [],
+  enhancers = [],
+}: {
+  middlewares?: SagaMiddleware[];
+  enhancers?: StoreEnhancer[];
+} = {}): Store => {
+  const sagaMiddleware = createSagaMiddleware();
 
-export default store;
+  middlewares.push(sagaMiddleware);
+  enhancers.push(applyMiddleware(...middlewares));
+  const enhancer = composeWithDevTools(...enhancers);
+
+  const store: Store<ApplicationState> = createStore(rootReducer, enhancer);
+
+  sagaMiddleware.run(rootSaga);
+
+  return store;
+};

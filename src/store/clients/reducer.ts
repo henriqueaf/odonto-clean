@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { ClientsTypes, ClientsState } from './types';
 
-const INITIAL_STATE = {
+const INITIAL_STATE: ClientsState = {
   data: [],
   error: false,
   loading: false,
